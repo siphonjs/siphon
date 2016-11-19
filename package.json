@@ -1,0 +1,13 @@
+{
+  "name": "siphon",
+  "version": "1.0.0",
+  "description": "data extraction library",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    
+  }
+}
