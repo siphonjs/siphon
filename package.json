@@ -8,6 +8,6 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    
+    "request": "^2.79.0"
   }
 }
