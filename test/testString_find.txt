@@ -1,16 +1,4 @@
-// stores all of the matches for a particular string and regular expression as an array in the data property of the siphon object
-// @params a regex to use and the string to search which defaults to the html property of the siphon object
 
-function find(regex, string = this.html) {
-  
-
-
-
-}
-
-module.exports = find;
-
-var textHtml = `
 <!DOCTYPE html>
 <!--[if IE 9]><html class="no-js ie9"> <![endif]-->
 <!--[if gt IE 9]><!--> <html class="no-js "> <!--<![endif]-->
@@ -3956,4 +3944,3 @@ wui.bootstrapped.precip = {
 		<div id="fb-root"></div>
 	</body>
 </html>
-`
