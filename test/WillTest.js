@@ -11,10 +11,9 @@ var mySiphon = siph()
   console.log(datum);
 })
 
-for(let i = 90025; i < 90026; i++) {
+for(let i = 90025; i < 90030; i++) {
   mySiphon.get(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`)
   // .setProxy('http://201.243.152.108:8080')
   .execute()
 }
-
 
