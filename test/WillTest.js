@@ -14,12 +14,3 @@ var mySiphon = siph()
 .store( (datum) => { console.log(datum) })
 .get('https://www.wunderground.com/cgi-bin/findweather/getForecast?query=90025')
 .run()
-
-
-
-// workerIds.forEach( (wid) => {
-//   cluster.workers[wid].send({
-//     type: 'shutdown',
-//     from: 'master'
-//   });
-// });
