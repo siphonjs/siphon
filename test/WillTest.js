@@ -3,17 +3,23 @@ const http = require('http');
 
 var counter = 0;
 var proxies = [];
-
-var mySiphon = siph()
-// .get('https://www.wunderground.com/cgi-bin/findweather/getForecast?query=90025')
-.find(/[0-9]{2}\.[0-9]/)
-.store( (datum) => {
-  console.log(datum);
-})
-
+var jobs = [];
+var temps = [];
 for(let i = 90025; i < 90030; i++) {
-  mySiphon.get(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`)
-  // .setProxy('http://201.243.152.108:8080')
-  .execute()
+  temps.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
 }
 
+var mySiphon = siph()
+.find(/[0-9]{2}\.[0-9]/)
+.store( (datum) => { console.log(datum) })
+.get('https://www.wunderground.com/cgi-bin/findweather/getForecast?query=90025')
+.run()
+
+
+
+// workerIds.forEach( (wid) => {
+//   cluster.workers[wid].send({
+//     type: 'shutdown',
+//     from: 'master'
+//   });
+// });
