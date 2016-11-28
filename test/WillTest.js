@@ -19,7 +19,7 @@ const http = require('http');
 var proxies = [];
 var jobs = [];
 var temps = [];
-for(let i = 90025; i < 90800; i++) {
+for(let i = 90000; i < 90500; i++) {
   temps.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
 }
 
@@ -29,5 +29,6 @@ var mySiphon = siphon()
   console.log(returnMessage);
   console.log('errors: ', returnMessage.errors.length, 'data: ', returnMessage.data.length);
 })
+.retries(2)
 .setURLs(temps)
 .run()
