@@ -10,22 +10,25 @@ const http = require('http');
 //   .forBrowser('chrome')
 //   .build();
 
-// driver.get('http://www.google.com/ncr');
+// driver.get('http://www.google.com/ncr');ki
 // driver.findElement(By.name('q')).sendKeys('webdriver');
 // driver.findElement(By.name('btnG')).click();
 // driver.wait(until.titleIs('webdriver - Google Search'), 1000);
 // driver.quit();
 
-var counter = 0;
 var proxies = [];
 var jobs = [];
 var temps = [];
-for(let i = 90025; i < 90030; i++) {
+for(let i = 90000; i < 90500; i++) {
   temps.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
 }
 
 var mySiphon = siphon()
 .find(/[0-9]{2}\.[0-9]/)
-.store( (datum) => { console.log(datum) })
+.store( (returnMessage) => { 
+  console.log(returnMessage);
+  console.log('errors: ', returnMessage.errors.length, 'data: ', returnMessage.data.length);
+})
+.retries(2)
 .setURLs(temps)
 .run()
