@@ -3,6 +3,7 @@ const http = require('http');
 
 var proxies = [];
 var temps = [];
+
 for(let i = 90025; i < 92025; i++) {
   temps.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
 }
