@@ -1,20 +1,29 @@
 const siphon = require('./../lib/Siphon');
 const http = require('http');
 
+var webdriver = require('selenium-webdriver')
+var driver = new webdriver.Builder()
+    .forBrowser('chrome')
+    .build();
 
-// var webdriver = require('selenium-webdriver'),
-//   By = webdriver.By,
-//   until = webdriver.until;
-
-// var driver = new webdriver.Builder()
-//   .forBrowser('chrome')
-//   .build();
-
-// driver.get('http://www.google.com/ncr');
-// driver.findElement(By.name('q')).sendKeys('webdriver');
-// driver.findElement(By.name('btnG')).click();
+driver.get('http://www.google.com/');
+driver.findElement(webdriver.By.name('q')).sendKeys('wiki');
+driver.findElement({ name: 'q'}).sendKeys(webdriver.Key.ENTER);
 // driver.wait(until.titleIs('webdriver - Google Search'), 1000);
-// driver.quit();
+driver.wait(check_title, 1000)
+driver.quit();
+
+function check_title() {
+  var promise = driver.getTitle().then(function(title){
+    if (title === 'wiki - Google Search') {
+      console.log('success');
+    } else {
+      console.log('fail --' + title);
+    }
+  });
+  return promise;
+}
+
 
 var counter = 0;
 var proxies = [];
@@ -29,3 +38,5 @@ var mySiphon = siphon()
 .store( (datum) => { console.log(datum) })
 .setURLs(temps)
 .run()
+
+//https://www.wunderground.com/cgi-bin/findweather/getForecast?query=98004
