@@ -5,7 +5,7 @@ const http = require('http');
 var proxies = [];
 var temps = [];
 
-for(let i = 90025; i < 92025; i++) {
+for(let i = 90025; i < 91025; i++) {
   temps.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
 }
 
@@ -17,7 +17,6 @@ var mySiphon = siphon()
 })
 .retries(2)
 .setURLs(temps)
-
 .run()
 
 // driver.get('http://www.wunderground.com');
