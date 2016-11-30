@@ -1,37 +1,31 @@
 const siphon = require('./../lib/Siphon');
 const http = require('http');
 
+var temps = [];
 
-// var proxies = [];
-// var temps = [];
-//
-// for(let i = 90025; i < 91025; i++) {
-//   temps.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
-// }
-//
-// var mySiphon = siphon()
+for(let i = 90025; i < 90030; i++) {
+  temps.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
+}
+
+// var regularSiphon = siphon()
+// .setURLs(temps)
 // .find(/[0-9]{2}\.[0-9]/)
+// .retries(2)
 // .store( (returnMessage) => {
 //   console.log(returnMessage);
 //   console.log('errors: ', returnMessage.errors.length, 'data: ', returnMessage.data.length);
 // })
-// .retries(2)
-// .setURLs(temps)
 // .run()
 
-driver.get('http://www.wunderground.com');
-console.log("working");
-driver.quit();
-
-var mySiphon = siphon()
-.get('http://www.wunderground.com')
-.selenium('chrome', driver => {
-  const currentLocation = driver
-    .findElement({className: 'fi-target-two'})
-    .click()
-
-  return currentLocation;
+var seleniumSiphon = siphon()
+.setURLs(temps)
+.selenium('chrome', (driver) => {
+  data = driver.findElement({className: 'city-nav-header'}).getText()
+  driver.quit();
+  return data;
 })
-.execute();
-
-//https://www.wunderground.com/cgi-bin/findweather/getForecast?query=98004
+.store( (returnMessage) => {
+  console.log(returnMessage);
+  console.log('errors: ', returnMessage.errors.length, 'data: ', returnMessage.data.length);
+})
+.run()
