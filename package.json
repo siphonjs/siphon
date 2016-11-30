@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "redis": "^2.6.3",
     "request": "^2.79.0",
     "selenium-webdriver": "^3.0.1"
   }

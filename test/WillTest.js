@@ -1,23 +1,29 @@
 const siphon = require('./../lib/Siphon');
 const http = require('http');
-
+// const red = require('../lib/redis/redisController');
 
 var proxies = [];
 var temps = [];
 
-for(let i = 90025; i < 91025; i++) {
+for (let i = 90025; i < 90027; i++) {
   temps.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
 }
 
 var mySiphon = siphon()
-.find(/[0-9]{2}\.[0-9]/)
-.store( (returnMessage) => {
-  console.log(returnMessage);
-  console.log('errors: ', returnMessage.errors.length, 'data: ', returnMessage.data.length);
-})
-.retries(2)
-.setURLs(temps)
-.run()
+  .find(/[0-9]{2}\.[0-9]/)
+  .store((returnMessage) => {
+    console.log(returnMessage);
+    console.log('errors: ', returnMessage.errors.length, 'data: ', returnMessage.data.length);
+  })
+  .retries(2)
+  .setURLs(temps)
+  .run();
+
+// red.enqueue(mySiphon);
+// red.rpoplpush('jobsQueue', function (siphonObject) {
+//   console.log(siphonObject);
+//   siphonObject.run();
+// });
 
 // driver.get('http://www.wunderground.com');
 // console.log("working");
