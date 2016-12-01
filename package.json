@@ -1,14 +1,34 @@
 {
-  "name": "siphon",
+  "name": "siphonjs",
   "version": "1.0.0",
-  "description": "data extraction library",
+  "description": "easy-to-use data extraction library for clustered and distributed web scraping",
+  "homepage": "https://github.com/siphonjs/siphon",
+  "bugs": { 
+    "url" : "https://github.com/siphonjs/siphon/issues"
+  },
+  "constributors": [
+    {"name": "William Galebach", "email": "william.galebach@gmail.com"},
+    {"name": "Sooeung Lee", "email": ""},
+    {"name": "George Norberg", "email": ""}
+  ],
+  "files": [
+    "main.js",
+    "lib"
+  ],
+  "main": "main.js",
+  "repository" :
+  { "type" : "git",
+    "url" : "https://github.com/siphonjs/siphon.git"
+  },
   "scripts": {
-    "start": "node index.js"
+    
   },
   "license": "MIT",
-  "private": true,
   "dependencies": {
-    "request": "^2.79.0",
+    "request": "^2.79.0"
+  },
+  "optionalDependencies": {
+    "redis": "^2.6.3",
     "selenium-webdriver": "^3.0.1"
   }
 }
