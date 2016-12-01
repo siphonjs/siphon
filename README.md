@@ -39,9 +39,9 @@ siphon()
 
 # Team
 
-![Image of Will](https://avatars0.githubusercontent.com/u/7759384?v=3&s=200)
-![Image of George](https://avatars3.githubusercontent.com/u/18508195?v=3&s=200)
-![Image of Soo](https://avatars1.githubusercontent.com/u/15530782?v=3&s=200)
+![Image of Will](https://avatars0.githubusercontent.com/u/7759384?v=3&s=175)
+![Image of George](https://avatars3.githubusercontent.com/u/18508195?v=3&s=175)
+![Image of Soo](https://avatars1.githubusercontent.com/u/15530782?v=3&s=175)
 
 # License
 
