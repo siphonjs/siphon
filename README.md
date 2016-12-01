@@ -2,12 +2,9 @@
 Siphonjs is an easy-to-use data extraction library for Nodejs designed to work at scale.
 
 Features include:
-- Only one dependency: the 'request' module
 - Regex-enabled scraping
 - Rotating proxies to enable higher volume searches 
 - Clustered servers for improved performance and error handling
-- Optional dependency: selenium-webdriver for jobs requiring full client-side rendering
-- Optional dependency: Redis to create a large queue connected to multiple servers
 
 # Install
 ```
@@ -33,18 +30,27 @@ siphon()
 .run()
 ```
 
+# Required Dependencies
+
+- `request` for http request handling
+
+# Optional Dependencies
+
+- `redis` for parallel processing with multiple servers
+- `selenium-webdriver` for jobs requiring full client-side rendering
+
 # API
 
 
 
 # Team
 
-![Image of Will](https://avatars0.githubusercontent.com/u/7759384?v=3&s=175)
-![Image of George](https://avatars3.githubusercontent.com/u/18508195?v=3&s=175)
-![Image of Soo](https://avatars1.githubusercontent.com/u/15530782?v=3&s=175)
+![Image of Will](https://avatars0.githubusercontent.com/u/7759384?v=3&s=150)
+![Image of George](https://avatars3.githubusercontent.com/u/18508195?v=3&s=150)
+![Image of Soo](https://avatars1.githubusercontent.com/u/15530782?v=3&s=150)
 
 # License
 
-
+MIT
 
 
