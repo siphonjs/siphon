@@ -41,20 +41,7 @@ siphon()
 
 # API
 
-Using Siphon is simple! After requiring the siphon module, simply invoke it and chain as many methods as you'd like. If you want to query another set of urls simultaneously, simply invoke another instance!
-
-The main logic behind the API is that the user is building up a Siphon object that defaults to these properties and values:
-
-```
-  numWorkers: require('os').cpus().length,
-  createdAt: null,
-  stage: null,
-  tries: 1,
-  searchTerms: [],
-  urlArray: []
-```
-
-Calling each method in the API either modifies these values or adds new key-value pairs. The final Siphon object is considered a 'job' and is processed accordingly.
+Using siphonjs is simple! After requiring the siphon module, simply invoke it and chain as many methods as you'd like. Want to pursue multiple queries in one document? Simply invoke another instance!
 
 ### .get
 
