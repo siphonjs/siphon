@@ -1,10 +1,18 @@
 # Siphon
 Siphonjs is an easy-to-use data extraction library for Nodejs designed to work at scale.
 
-Features include:
-- Regex-enabled scraping
+## Features
+
+- Intuitive and readable API
+- Regex-enabled searching
+- Customizable number of retries
+- Customizable runtime interval
 - Rotating proxies to enable higher volume searches 
 - Clustered servers for improved performance and error handling
+- Direct database storage
+- Selenium Web Driver for DOM manipulation
+- Redis for scaling to multiple servers
+- Lightweight with no large required dependencies
 
 ## Install
 ```
@@ -41,11 +49,9 @@ siphon()
 
 # API
 
-Using Siphon is simple! After requiring the Siphon module, simply invoke it and chain as many methods as you'd like.
+Using Siphon is simple! After requiring the Siphon module, simply invoke it and chain as many methods as you'd like. Execute with .run().
 
 ### .get
-
-
 
 ### .find
 
@@ -59,9 +65,9 @@ Using Siphon is simple! After requiring the Siphon module, simply invoke it and 
 
 ### .setInterval
 
-### .setWorkers
-
 ### .selenium
+
+### .run
 
 ## Team
 
