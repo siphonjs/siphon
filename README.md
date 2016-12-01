@@ -41,9 +41,11 @@ siphon()
 
 # API
 
-Using siphonjs is simple! After requiring the siphon module, simply invoke it and chain as many methods as you'd like. Want to pursue multiple queries in one document? Simply invoke another instance!
+Using Siphon is simple! After requiring the Siphon module, simply invoke it and chain as many methods as you'd like.
 
 ### .get
+
+
 
 ### .find
 
