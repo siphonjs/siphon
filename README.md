@@ -8,7 +8,8 @@ $ npm install --save siphonjs
 
 Collect 1000 temperatures in a matter of seconds!
 
-```const siphon = require('siphonjs');
+```
+const siphon = require('siphonjs');
 
 const urls = [];
 
