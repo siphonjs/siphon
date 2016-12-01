@@ -6,12 +6,12 @@ Features include:
 - Rotating proxies to enable higher volume searches 
 - Clustered servers for improved performance and error handling
 
-# Install
+## Install
 ```
 $ npm install --save siphonjs
 ```
 
-# Usage
+## Usage
 
 Collect 1000 temperatures in a matter of seconds!
 
@@ -30,26 +30,57 @@ siphon()
 .run()
 ```
 
-# Required Dependencies
+## Required Dependencies
 
 - `request` for http request handling
 
-# Optional Dependencies
+## Optional Dependencies
 
 - `redis` for parallel processing with multiple servers
 - `selenium-webdriver` for jobs requiring full client-side rendering
 
 # API
 
+Using Siphon is simple! After requiring the siphon module, simply invoke it and chain as many methods as you'd like. If you want to query another set of urls simultaneously, simply invoke another instance!
 
+The main logic behind the API is that the user is building up a Siphon object that defaults to these properties and values:
 
-# Team
+```
+  numWorkers: require('os').cpus().length,
+  createdAt: null,
+  stage: null,
+  tries: 1,
+  searchTerms: [],
+  urlArray: []
+```
+
+Calling each method in the API either modifies these values or adds new key-value pairs. The final Siphon object is considered a 'job' and is processed accordingly.
+
+### .get
+
+### .find
+
+### .setURLS
+
+### .retries
+
+### .store
+
+### .setProxies
+
+### .setInterval
+
+### .setWorkers
+
+### .selenium
+
+## Team
 
 ![Image of Will](https://avatars0.githubusercontent.com/u/7759384?v=3&s=150)
 ![Image of George](https://avatars3.githubusercontent.com/u/18508195?v=3&s=150)
 ![Image of Soo](https://avatars1.githubusercontent.com/u/15530782?v=3&s=150)
 
-# License
+## License
 
 MIT
 
