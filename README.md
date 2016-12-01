@@ -1,2 +1,56 @@
 # Siphon
-Siphon is an easy-to-use data extraction library for Nodejs that is designed to work at scale by making use of Node's built-in clustering behavior by default. Siphon can make use of proxies to enable a higher volume of data extraction/web scraping. Siphon has also been set up to work on a cluster of servers with a Redis queue handling job assignment. Siphon requires the 'request' module as a dependency, and there are optional dependecies of selenium-webdriver and cheerio for jobs requiring DOM actions and full client-side rendering.
+Siphonjs is an easy-to-use data extraction library for Nodejs designed to work at scale.
+
+Features include:
+- Regex-enabled scraping
+- Rotating proxies to enable higher volume searches 
+- Clustered servers for improved performance and error handling
+
+# Install
+```
+$ npm install --save siphonjs
+```
+
+# Usage
+
+Collect 1000 temperatures in a matter of seconds!
+
+```
+const siphon = require('siphonjs');
+
+const urls = [];
+
+for(let i = 90025; i < 91025; i++) {
+  urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
+}
+
+siphon()
+.setURLs(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.run()
+```
+
+# Required Dependencies
+
+- `request` for http request handling
+
+# Optional Dependencies
+
+- `redis` for parallel processing with multiple servers
+- `selenium-webdriver` for jobs requiring full client-side rendering
+
+# API
+
+
+
+# Team
+
+![Image of Will](https://avatars0.githubusercontent.com/u/7759384?v=3&s=150)
+![Image of George](https://avatars3.githubusercontent.com/u/18508195?v=3&s=150)
+![Image of Soo](https://avatars1.githubusercontent.com/u/15530782?v=3&s=150)
+
+# License
+
+MIT
+
+
