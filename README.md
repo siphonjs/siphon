@@ -51,19 +51,25 @@ siphon()
 
 Using Siphon is simple! After requiring the Siphon module, simply invoke it and chain as many methods as you'd like. Execute with .run().
 
-### .setURLS (*Required*)
+### .setURLS
+
+*Required*
 
 Parameter Type: `array of strings`
 
 Each URL represents a query.
 
-### .find (*Required*)
+### .find
+
+*Required*
 
 Parameter Type: `regular expression`
 
 Customize your search with regex.
 
-### .run (*Required*)
+### .run
+
+*Required*
 
 No parameters. Simply invoke as last method to execute your search!
 
