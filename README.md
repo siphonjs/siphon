@@ -3,12 +3,12 @@ Siphonjs is an easy-to-use data extraction library for Nodejs designed to work a
 
 ## Features
 
-- Intuitive and readable API
+- Readable API for intuitive use
 - Rotating proxies to enable higher volume searches 
 - Clustered servers for improved performance and error handling
-- Regex-enabled searching
+- Regex-enabled for specific searching
 - Custom number of retries
-- Custom runtime interval
+- Custom runtime intervals
 - Direct database storage
 - Pre-configured Selenium Web Driver for advanced DOM manipulation
 - Pre-configured Redis access for scaling to multiple servers
@@ -49,34 +49,64 @@ siphon()
 
 # API
 
-Using Siphon is simple! After requiring the Siphon module, simply invoke it and chain as many methods as you'd like. Execute with .run().
+Using Siphon is simple! After requiring the Siphon module, simply invoke it and chain as many methods as you'd like. The only required methods are .setURLs, .find, and .run().
 
-### .get
+### .setURLs
+
+Parameter: `array of strings`
+
+Each URL represents a query.
 
 ### .find
 
-### .setURLS
+Parameter: `regular expression`
 
-### .retries
-
-### .store
-
-### .setProxies
-
-### .setInterval
-
-### .selenium
+Customize your search with regex.
 
 ### .run
 
+No parameters. Simply invoke as last method to execute your search!
+
+### .retries
+
+Parameter: `number`
+
+If a query fails, this will allow more tries on each failed query.
+
+### .store
+
+Parameter: `function`
+
+Use a callback to insert data into your database.
+
+### .setProxies
+
+Parameter: `array of strings`
+
+If you provide more than one proxy, we automatically rotate through them for you!
+
+### .setInterval
+
+Parameter: `number` (seconds)
+
+Sets how often you would like to search again. 
+
+### .selenium
+
+Parameter: `function`
+
+If you wish to use the power of the Selenium Web Driver, insert all Selenium logic inside of this callback.
+
+
+
 ## Team
 
-![Image of Will](https://avatars0.githubusercontent.com/u/7759384?v=3&s=150)
-![Image of George](https://avatars3.githubusercontent.com/u/18508195?v=3&s=150)
-![Image of Soo](https://avatars1.githubusercontent.com/u/15530782?v=3&s=150)
+[![Image of Will](https://avatars0.githubusercontent.com/u/7759384?v=3&s=150)](https://github.com/willbach)
+[![Image of George](https://avatars3.githubusercontent.com/u/18508195?v=3&s=150)](https://github.com/ganorberg)
+[![Image of Soo](https://avatars1.githubusercontent.com/u/15530782?v=3&s=150)](https://github.com/sooeung2)
 
 ## License
 
-MIT
+Released under the [MIT License](https://opensource.org/licenses/mit-license.php).
 
 
