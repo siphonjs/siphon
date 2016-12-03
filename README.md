@@ -103,7 +103,7 @@ If you wish to use the power of the Selenium Web Driver, insert all Selenium log
 
 [![Image of Will](https://avatars0.githubusercontent.com/u/7759384?v=3&s=150)](https://github.com/willbach)
 [![Image of George](https://avatars3.githubusercontent.com/u/18508195?v=3&s=150)](https://github.com/ganorberg)
-![Image of Soo](https://avatars1.githubusercontent.com/u/15530782?v=3&s=150)
+[![Image of Soo](https://avatars1.githubusercontent.com/u/15530782?v=3&s=150)](https://github.com/sooeung2)
 
 ## License
 
