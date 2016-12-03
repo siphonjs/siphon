@@ -3,12 +3,12 @@ Siphonjs is an easy-to-use data extraction library for Nodejs designed to work a
 
 ## Features
 
-- Intuitive and readable API
+- Readable API for intuitive use
 - Rotating proxies to enable higher volume searches 
 - Clustered servers for improved performance and error handling
-- Regex-enabled searching
+- Regex-enabled for specific searching
 - Custom number of retries
-- Custom runtime interval
+- Custom runtime intervals
 - Direct database storage
 - Pre-configured Selenium Web Driver for advanced DOM manipulation
 - Pre-configured Redis access for scaling to multiple servers
@@ -51,23 +51,53 @@ siphon()
 
 Using Siphon is simple! After requiring the Siphon module, simply invoke it and chain as many methods as you'd like. Execute with .run().
 
-### .get
+### .setURLS *Required*
 
-### .find
+Parameter Type: `array of strings`
 
-### .setURLS
+Each URL represents a query.
+
+### .find *Required*
+
+Parameter Type: `regular expression`
+
+Customize your search with regex.
+
+### .run *Required*
+
+No parameters. Simply invoke as last method to execute your search!
 
 ### .retries
 
+Parameter Type: `number`
+
+If a query fails, this will allow more tries on each failed query.
+
 ### .store
+
+Parameter Type: `function`
+
+Use a callback to insert data into your database.
 
 ### .setProxies
 
+Parameter Type: `array of strings`
+
+If you provide more than one proxy, we automatically rotate through them for you!
+
 ### .setInterval
+
+Parameter Type: `number` (seconds)
+
+Sets how often you would like to search again. 
 
 ### .selenium
 
-### .run
+Parameter Type: `function`
+
+If you wish to use the power of the Selenium Web Driver, insert all Selenium logic inside of this callback.
+
+
 
 ## Team
 
