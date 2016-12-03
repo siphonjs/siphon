@@ -49,57 +49,51 @@ siphon()
 
 # API
 
-Using Siphon is simple! After requiring the Siphon module, simply invoke it and chain as many methods as you'd like. Execute with .run().
+Using Siphon is simple! After requiring the Siphon module, simply invoke it and chain as many methods as you'd like. The only required methods are .setURLs, .find, and .run().
 
-### .setURLS
+### .setURLs
 
-*Required*
-
-Parameter Type: `array of strings`
+Parameter: `array of strings`
 
 Each URL represents a query.
 
 ### .find
 
-*Required*
-
-Parameter Type: `regular expression`
+Parameter: `regular expression`
 
 Customize your search with regex.
 
 ### .run
 
-*Required*
-
 No parameters. Simply invoke as last method to execute your search!
 
 ### .retries
 
-Parameter Type: `number`
+Parameter: `number`
 
 If a query fails, this will allow more tries on each failed query.
 
 ### .store
 
-Parameter Type: `function`
+Parameter: `function`
 
 Use a callback to insert data into your database.
 
 ### .setProxies
 
-Parameter Type: `array of strings`
+Parameter: `array of strings`
 
 If you provide more than one proxy, we automatically rotate through them for you!
 
 ### .setInterval
 
-Parameter Type: `number` (seconds)
+Parameter: `number` (seconds)
 
 Sets how often you would like to search again. 
 
 ### .selenium
 
-Parameter Type: `function`
+Parameter: `function`
 
 If you wish to use the power of the Selenium Web Driver, insert all Selenium logic inside of this callback.
 
