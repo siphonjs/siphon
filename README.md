@@ -3,7 +3,7 @@ Siphonjs is an easy-to-use data extraction library for Nodejs designed to work a
 
 ## Features
 
-- Readable API for intuitive use
+- Intuitive chainable API
 - Rotating proxies to enable higher volume searches 
 - Clustered servers for improved performance and error handling
 - Regex-enabled for specific searching
