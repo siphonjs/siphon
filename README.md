@@ -32,10 +32,9 @@ for (let i = 90025; i < 91025; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
 }
 
-const mySiphon = siphon()
-  .get(urls)
-  .find(/[0-9]{2}\.[0-9]/)
-  .run()
+siphon().get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.run()
 ```
 
 ## Required Dependencies
