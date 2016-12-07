@@ -27,15 +27,14 @@ Collect 1000 temperatures in a matter of seconds!
 const siphon = require('siphonjs');
 
 const urls = [];
-
 for (let i = 90025; i < 91025; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
 }
 
-const mySiphon = siphon()
-  .setURLs(urls)
-  .find(/[0-9]{2}\.[0-9]/)
-  .run()
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.run()
 ```
 
 ## Required Dependencies
@@ -49,11 +48,11 @@ const mySiphon = siphon()
 
 # API
 
-Using Siphon is simple! After requiring the Siphon module, simply invoke it and chain as many methods as you'd like. The only required methods are .setURLs, .find, and .run().
+Using Siphon is simple! Require, invoke, then chain as many methods as you'd like. The only required methods are .get, .find and .run().
 
-### .setURLs
+### .get
 
-Parameter: `array of strings`
+Parameter: `string OR array of strings`
 
 Each URL represents a query.
 
