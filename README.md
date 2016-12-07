@@ -3,7 +3,7 @@ Siphonjs is an easy-to-use data extraction library for Nodejs designed to work a
 
 ## Features
 
-- Readable API for intuitive use
+- Intuitive chainable API
 - Rotating proxies to enable higher volume searches 
 - Clustered servers for improved performance and error handling
 - Regex-enabled for specific searching
@@ -28,14 +28,14 @@ const siphon = require('siphonjs');
 
 const urls = [];
 
-for(let i = 90025; i < 91025; i++) {
+for (let i = 90025; i < 91025; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
 }
 
-siphon()
-.setURLs(urls)
-.find(/[0-9]{2}\.[0-9]/)
-.run()
+const mySiphon = siphon()
+  .setURLs(urls)
+  .find(/[0-9]{2}\.[0-9]/)
+  .run()
 ```
 
 ## Required Dependencies
