@@ -33,7 +33,7 @@ for (let i = 90025; i < 91025; i++) {
 }
 
 const mySiphon = siphon()
-  .setURLs(urls)
+  .get(urls)
   .find(/[0-9]{2}\.[0-9]/)
   .run()
 ```
@@ -49,11 +49,11 @@ const mySiphon = siphon()
 
 # API
 
-Using Siphon is simple! After requiring the Siphon module, simply invoke it and chain as many methods as you'd like. The only required methods are .setURLs, .find, and .run().
+Using Siphon is simple! Require, invoke, then chain as many methods as you'd like. The only required methods are .get, .find and .run().
 
-### .setURLs
+### .get
 
-Parameter: `array of strings`
+Parameter: `string OR array of strings`
 
 Each URL represents a query.
 
