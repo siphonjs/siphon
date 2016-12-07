@@ -35,13 +35,13 @@
   "license": "MIT",
   "dependencies": {
     "chai": "^3.5.0",
-    "cheerio": "^0.22.0",
     "mocha": "^3.2.0",
     "request": "^2.79.0",
     "url-parse": "^1.1.7"
   },
   "optionalDependencies": {
     "redis": "^2.6.3",
-    "selenium-webdriver": "^3.0.1"
+    "selenium-webdriver": "^3.0.1",
+    "cheerio": "^0.22.0"
   }
 }
