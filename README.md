@@ -143,6 +143,18 @@ Parameter: `function`
 
 Use a callback to insert data into your database.
 
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.store((data) => {
+  Tank.create({ html: data }, (err) => {
+    if (err) return handleError(err);
+  });
+})
+.run()
+```
+
 ### .setProxies
 
 Parameter: `array of strings`
