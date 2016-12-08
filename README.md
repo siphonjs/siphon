@@ -49,7 +49,7 @@ siphon()
 
 # API
 
-Using Siphon is simple! Require, invoke, then chain as many methods as you'd like. The only required methods are .get, .find and .run().
+Using Siphon is simple! Require, invoke, then chain as many methods as you'd like. Always include .get() and end with .run().
 
 ### .cheerio
 
