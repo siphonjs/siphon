@@ -55,7 +55,18 @@ Using Siphon is simple! Require, invoke, then chain as many methods as you'd lik
 
 Parameter: `function`
 
-Callback for all cheerio logic that we feed with HTML string
+Callback for all cheerio logic. We expose HTML string.
+
+```
+siphon()
+.get(urls)
+.cheerio((html) => {
+  const $ = cheerio.load(html);
+  const titles = $('h1').text();
+  ...etc
+})
+.run()
+```
 
 ### .get
 
