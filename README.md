@@ -34,6 +34,7 @@ for (let i = 90025; i < 91025; i++) {
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
+.notify()
 .run()
 ```
 
@@ -50,6 +51,12 @@ siphon()
 
 Using Siphon is simple! Require, invoke, then chain as many methods as you'd like. The only required methods are .get, .find and .run().
 
+### .cheerio
+
+Parameter: `function`
+
+Callback for all cheerio logic that we feed with HTML string
+
 ### .get
 
 Parameter: `string OR array of strings`
@@ -61,6 +68,12 @@ Each URL represents a query.
 Parameter: `regular expression`
 
 Customize your search with regex.
+
+### .notify
+
+Parameter: `function`
+
+To visualize received data. Defaults to console.log with stringified data.
 
 ### .run
 
