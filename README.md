@@ -38,6 +38,39 @@ siphon()
 .run()
 ```
 
+## Advanced Usage
+
+If you wish to improve performance with a Redis server and remote server cluster, we make it easy!
+
+Controller:
+```
+const siphon = require('siphonjs');
+
+const urls = [];
+for (let i = 90025; i < 91025; i++) {
+  urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
+}
+
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.store((data) => {
+  Tank.create({ html: data }, (err) => {
+    if (err) return handleError(err);
+  }))
+.setRedis(6379, 192.168.123.456, 'password')
+.enqueue()
+```
+
+Workers:
+```
+const siphon = require('siphonjs');
+
+siphon()
+.setRedis(6379, 192.168.123.456, 'password')
+.run()
+```
+
 ## Required Dependencies
 
 - `request` for http request handling
@@ -46,10 +79,11 @@ siphon()
 
 - `redis` for parallel processing with multiple servers
 - `selenium-webdriver` for jobs requiring full client-side rendering
+- `cheerio` to search HTML with Cheerio selector library
 
 # API
 
-Using Siphon is simple! Require, invoke, then chain as many methods as you'd like. Always include .get() and end with .run().
+Using Siphon is simple! Chain as many methods as you'd like.
 
 ### .cheerio
 
@@ -110,18 +144,6 @@ siphon()
 .run()
 ```
 
-### .run
-
-No parameters. Simply invoke as last method to execute your search!
-
-```
-siphon()
-.get(urls)
-.find(/[0-9]{2}\.[0-9]/)
-.notify()
-.run()
-```
-
 ### .retries
 
 Parameter: `number`
@@ -137,35 +159,43 @@ siphon()
 .run()
 ```
 
-### .store
+### .run
 
-Parameter: `function`
-
-Use a callback to insert data into your database.
+No parameters. Simply invoke as last method to execute your search!
 
 ```
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.store((data) => {
-  Tank.create({ html: data }, (err) => {
-    if (err) return handleError(err);
-  });
-})
+.notify()
 .run()
 ```
 
-### .setProxies
+### .selenium
 
-Parameter: `array of strings`
+Parameter: `function`
 
-If you provide more than one proxy, we automatically rotate through them for you!
+If you wish to use the power of the Selenium Web Driver, insert all Selenium logic inside of this callback.
 
 ```
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.setProxies(['192.168.1.2', '123.456.7.8'])
+.selenium('chrome', (data) => console.log(data))
+.run()
+```
+
+### .setHeaders
+
+Parameter: `object`
+
+Provide headers for 
+
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.setHeaders({ 'User-Agent': 'George Soowill' })
 .notify()
 .run()
 ```
@@ -185,17 +215,36 @@ siphon()
 .run()
 ```
 
-### .selenium
+### .setProxies
 
-Parameter: `function`
+Parameter: `array of strings`
 
-If you wish to use the power of the Selenium Web Driver, insert all Selenium logic inside of this callback.
+If you provide more than one proxy, we automatically rotate through them for you!
 
 ```
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.selenium('chrome', (data) => console.log(data))
+.setProxies(['192.168.1.2', '123.456.7.8'])
+.notify()
+.run()
+```
+
+###
+
+Parameter: `function`
+
+Use a callback to insert data into your database.
+
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.store((data) => {
+  Tank.create({ html: data }, (err) => {
+    if (err) return handleError(err);
+  });
+})
 .run()
 ```
 
