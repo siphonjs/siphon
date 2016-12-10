@@ -38,6 +38,8 @@ siphon()
 .run()
 ```
 
+## Advanced Usage
+
 If you wish to improve performance with a Redis server and remote server cluster, we make it easy!
 
 Controller:
