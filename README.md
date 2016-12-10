@@ -34,6 +34,7 @@ for (let i = 90025; i < 91025; i++) {
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
+.notify()
 .run()
 ```
 
@@ -48,7 +49,24 @@ siphon()
 
 # API
 
-Using Siphon is simple! Require, invoke, then chain as many methods as you'd like. The only required methods are .get, .find and .run().
+Using Siphon is simple! Require, invoke, then chain as many methods as you'd like. Always include .get() and end with .run().
+
+### .cheerio
+
+Parameter: `function`
+
+Callback for all cheerio logic. We expose HTML string.
+
+```
+siphon()
+.get(urls)
+.cheerio((html) => {
+  const $ = cheerio.load(html);
+  const titles = $('h1').text();
+  ...etc
+})
+.run()
+```
 
 ### .get
 
@@ -56,15 +74,53 @@ Parameter: `string OR array of strings`
 
 Each URL represents a query.
 
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.notify()
+.run()
+```
+
 ### .find
 
 Parameter: `regular expression`
 
 Customize your search with regex.
 
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.notify()
+.run()
+```
+
+### .notify
+
+Parameter: `function`
+
+To visualize received data. Defaults to console.log with stringified data.
+
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.notify()
+.run()
+```
+
 ### .run
 
 No parameters. Simply invoke as last method to execute your search!
+
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.notify()
+.run()
+```
 
 ### .retries
 
@@ -72,11 +128,32 @@ Parameter: `number`
 
 If a query fails, this will allow more tries on each failed query.
 
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.retries(5)
+.notify()
+.run()
+```
+
 ### .store
 
 Parameter: `function`
 
 Use a callback to insert data into your database.
+
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.store((data) => {
+  Tank.create({ html: data }, (err) => {
+    if (err) return handleError(err);
+  });
+})
+.run()
+```
 
 ### .setProxies
 
@@ -84,11 +161,29 @@ Parameter: `array of strings`
 
 If you provide more than one proxy, we automatically rotate through them for you!
 
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.setProxies(['192.168.1.2', '123.456.7.8'])
+.notify()
+.run()
+```
+
 ### .setInterval
 
 Parameter: `number` (seconds)
 
-Sets how often you would like to search again. 
+Sets how often you would like to search again.
+
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.setInterval(5000)
+.notify()
+.run()
+```
 
 ### .selenium
 
@@ -96,7 +191,13 @@ Parameter: `function`
 
 If you wish to use the power of the Selenium Web Driver, insert all Selenium logic inside of this callback.
 
-
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.selenium('chrome', (data) => console.log(data))
+.run()
+```
 
 ## Team
 
