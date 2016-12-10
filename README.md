@@ -38,6 +38,37 @@ siphon()
 .run()
 ```
 
+If you wish to improve performance with a Redis server and remote server cluster, we make it easy!
+
+Controller:
+```
+const siphon = require('siphonjs');
+
+const urls = [];
+for (let i = 90025; i < 91025; i++) {
+  urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
+}
+
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.store((data) => {
+  Tank.create({ html: data }, (err) => {
+    if (err) return handleError(err);
+  }))
+.setRedis(6379, 192.168.123.456, 'password')
+.enqueue()
+```
+
+Workers:
+```
+const siphon = require('siphonjs');
+
+siphon()
+.setRedis(6379, 192.168.123.456, 'password')
+.run()
+```
+
 ## Required Dependencies
 
 - `request` for http request handling
@@ -50,7 +81,7 @@ siphon()
 
 # API
 
-Using Siphon is simple! Chain as many methods as you'd like. Always include .get() and end with .run().
+Using Siphon is simple! Chain as many methods as you'd like.
 
 ### .cheerio
 
@@ -197,7 +228,7 @@ siphon()
 .run()
 ```
 
-### .store
+###
 
 Parameter: `function`
 
