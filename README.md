@@ -162,7 +162,7 @@ Provide headers for
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.setHeaders({ User-Agent: 'George Soowill' })
+.setHeaders({ 'User-Agent': 'George Soowill' })
 .notify()
 .run()
 ```
