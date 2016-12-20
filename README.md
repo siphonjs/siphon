@@ -38,7 +38,7 @@ siphon()
 
 ## Advanced Usage
 
-Extract up to 100x faster using up to 100 remote servers and a Redis queue!
+Extract faster with remote servers and a Redis queue! We handle horizontal scaling under the hood.
 
 Controller:
 ```
