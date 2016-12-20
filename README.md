@@ -201,7 +201,7 @@ siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
 .selenium('chrome', (driver) => {
-	data = driver.findElement({className: 'city-nav-header'}).getText();
+	data = driver.findElement({className: 'class-name'}).getText();
 	driver.quit();
 	return data;
 })
