@@ -4,15 +4,14 @@ Siphonjs is an easy-to-use data extraction library for Nodejs designed to work a
 ## Features
 
 - Intuitive chainable API
-- Rotating proxies to enable higher volume searches 
-- Clustered servers for improved performance and error handling
-- Regex-enabled for specific searching
-- Custom number of retries
-- Custom runtime intervals
-- Direct database storage
+- Fault tolerant with retries and advanced error handling
+- Proxies automatically rotated to enable higher volume searches 
+- Clustered Node.js servers for improved server-side performance
+- Custom runtime intervals for throttling to match site limits
 - Pre-configured Selenium Web Driver for advanced DOM manipulation
 - Pre-configured Redis access for scaling to multiple servers
 - Lightweight with no large required dependencies
+- Direct database storage
 
 ## Install
 ```
@@ -40,24 +39,25 @@ siphon()
 
 ## Advanced Usage
 
-If you wish to improve performance with a Redis server and remote server cluster, we make it easy!
+Extract up to 100x faster using up to 100 remote servers and a Redis queue!
 
 Controller:
 ```
 const siphon = require('siphonjs');
 
 const urls = [];
-for (let i = 90025; i < 91025; i++) {
+for (let i = 10000; i <= 99999; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
 }
 
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.store((data) => {
-  Tank.create({ html: data }, (err) => {
+.notify((statusMessage, requestObject) => {
+  Model.bulkCreate({ processedHtml: statusMessage.data }, (err) => {
     if (err) return handleError(err);
-  }))
+  });
+})
 .setRedis(6379, 192.168.123.456, 'password')
 .enqueue()
 ```
@@ -84,23 +84,6 @@ siphon()
 # API
 
 Using Siphon is simple! Chain as many methods as you'd like.
-
-### .cheerio
-
-Parameter: `function`
-
-Callback for all cheerio logic. We expose HTML string.
-
-```
-siphon()
-.get(urls)
-.cheerio((html) => {
-  const $ = cheerio.load(html);
-  const titles = $('h1').text();
-  ...etc
-})
-.run()
-```
 
 ### .get
 
@@ -161,6 +144,24 @@ siphon()
 .run()
 ```
 
+### .processHtml
+
+Parameters: `function`
+
+Callback receives entire HTML string. 
+Add second parameter to callback if you'd like to traverse with Cheerio library.
+
+```
+siphon()
+.get(urls)
+.processHtml((html, cheerio) => {
+  const $ = cheerio.load(html);
+  const titles = $('h1').text();
+  ...etc
+})
+.run()
+```
+
 ### .retries
 
 Parameter: `number`
@@ -198,7 +199,11 @@ If you wish to use the power of the Selenium Web Driver, insert all Selenium log
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.selenium('chrome', (data) => console.log(data))
+.selenium('chrome', (driver) => {
+	data = driver.findElement({className: 'city-nav-header'}).getText();
+	driver.quit();
+	return data;
+})
 .run()
 ```
 
