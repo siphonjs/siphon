@@ -24,6 +24,7 @@ Collect 1000 temperatures in a matter of seconds!
 ```
 const siphon = require('siphonjs');
 
+//Push in urls of zipcode from 90025 to 91025
 const urls = [];
 for (let i = 90025; i < 91025; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
@@ -44,6 +45,7 @@ Controller:
 ```
 const siphon = require('siphonjs');
 
+//Push in urls of zipcode from 10000 to 99999
 const urls = [];
 for (let i = 10000; i <= 99999; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
