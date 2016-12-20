@@ -80,7 +80,6 @@ siphon()
 
 - `redis` for parallel processing with multiple servers
 - `selenium-webdriver` for jobs requiring full client-side rendering
-- `cheerio` to search HTML with Cheerio selector library
 
 # API
 
