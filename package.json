@@ -1,7 +1,7 @@
 {
   "name": "siphonjs",
-  "version": "1.1.0",
-  "description": "easy-to-use data extraction library for clustered and distributed web scraping",
+  "version": "1.1.1",
+  "description": "Distributed data extraction library",
   "homepage": "https://github.com/siphonjs/siphon",
   "bugs": {
     "url": "https://github.com/siphonjs/siphon/issues"
