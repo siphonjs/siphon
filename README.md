@@ -1,15 +1,13 @@
 # Siphon
-Siphonjs is an easy-to-use data extraction library for Nodejs designed to work at scale.
+Siphonjs is an easy-to-use data extraction library for Node.js designed to work at scale.
 
 ## Features
 
 - Intuitive chainable API
-- Rotating proxies to enable higher volume searches 
-- Clustered servers for improved performance and error handling
-- Regex-enabled for specific searching
-- Custom number of retries
-- Custom runtime intervals
-- Direct database storage
+- Fault tolerant with retries and advanced error handling
+- Proxies automatically rotated to enable higher volume searches 
+- Clustered Node.js servers for improved server-side performance
+- Custom runtime intervals for throttling to match site limits
 - Pre-configured Selenium Web Driver for advanced DOM manipulation
 - Pre-configured Redis access for scaling to multiple servers
 - Lightweight with no large required dependencies
@@ -26,6 +24,7 @@ Collect 1000 temperatures in a matter of seconds!
 ```
 const siphon = require('siphonjs');
 
+// Collect 1000 weather urls to search
 const urls = [];
 for (let i = 90025; i < 91025; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
@@ -40,24 +39,26 @@ siphon()
 
 ## Advanced Usage
 
-If you wish to improve performance with a Redis server and remote server cluster, we make it easy!
+Extract faster with remote servers and a Redis queue! We handle horizontal scaling under the hood.
 
 Controller:
 ```
 const siphon = require('siphonjs');
 
+// Collect 90000 weather urls to search
 const urls = [];
-for (let i = 90025; i < 91025; i++) {
+for (let i = 10000; i <= 99999; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
 }
 
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.store((data) => {
-  Tank.create({ html: data }, (err) => {
+.notify((statusMessage, requestObject) => {
+  Model.bulkCreate({ processedHtml: statusMessage.data }, (err) => {
     if (err) return handleError(err);
-  }))
+  });
+})
 .setRedis(6379, 192.168.123.456, 'password')
 .enqueue()
 ```
@@ -84,23 +85,6 @@ siphon()
 # API
 
 Using Siphon is simple! Chain as many methods as you'd like.
-
-### .cheerio
-
-Parameter: `function`
-
-Callback for all cheerio logic. We expose HTML string.
-
-```
-siphon()
-.get(urls)
-.cheerio((html) => {
-  const $ = cheerio.load(html);
-  const titles = $('h1').text();
-  ...etc
-})
-.run()
-```
 
 ### .get
 
@@ -132,15 +116,50 @@ siphon()
 
 ### .notify
 
-Parameter: `function`
+Parameters: `function`
 
-To visualize received data. Defaults to console.log with stringified data.
+Notify is used to both visualize received data and store your data in a database. 
+If invoked without parameters, notify defaults to console.log with stringified data.
+
+Here are values you may wish to grab from the status message:
+
+```
+{
+  id: // unique URL string,
+  errors: [],
+  data: [],
+}
+```
+
+Example with Sequelize's "bulk create" method to store an array of values:
 
 ```
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.notify()
+.notify((statusMessage, requestObject) => {
+  Tank.bulkCreate({ processedHtml: statusMessage.data }, (err) => {
+    if (err) return handleError(err);
+  });
+})
+.run()
+```
+
+### .processHtml
+
+Parameters: `function`
+
+Callback receives entire HTML string. 
+Add second parameter to callback if you'd like to traverse with Cheerio library.
+
+```
+siphon()
+.get(urls)
+.processHtml((html, cheerio) => {
+  const $ = cheerio.load(html);
+  const titles = $('h1').text();
+  ...etc
+})
 .run()
 ```
 
@@ -181,7 +200,11 @@ If you wish to use the power of the Selenium Web Driver, insert all Selenium log
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.selenium('chrome', (data) => console.log(data))
+.selenium('chrome', (driver) => {
+	data = driver.findElement({className: 'class-name'}).getText();
+	driver.quit();
+	return data;
+})
 .run()
 ```
 
@@ -189,7 +212,7 @@ siphon()
 
 Parameter: `object`
 
-Provide headers for 
+Provide headers for GET requests.
 
 ```
 siphon()
@@ -202,15 +225,15 @@ siphon()
 
 ### .setInterval
 
-Parameter: `number` (seconds)
+Parameter: `number` (milliseconds)
 
-Sets how often you would like to search again.
+Sets how often you would like to search again. Great for throttling calls to stay within website's limits.
 
 ```
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.setInterval(5000)
+.setInterval(200)
 .notify()
 .run()
 ```
@@ -227,24 +250,6 @@ siphon()
 .find(/[0-9]{2}\.[0-9]/)
 .setProxies(['192.168.1.2', '123.456.7.8'])
 .notify()
-.run()
-```
-
-###
-
-Parameter: `function`
-
-Use a callback to insert data into your database.
-
-```
-siphon()
-.get(urls)
-.find(/[0-9]{2}\.[0-9]/)
-.store((data) => {
-  Tank.create({ html: data }, (err) => {
-    if (err) return handleError(err);
-  });
-})
 .run()
 ```
 

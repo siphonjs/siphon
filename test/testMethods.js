@@ -16,13 +16,6 @@ describe('default Siphon Object', () => {
   });
 });
 
-describe('cheerio method', () => {
-  it('should add notifyFunction to Siphon Object', () => {
-    mySiphon.cheerio(() => console.log('cheerio logic'));
-    expect(mySiphon.cheerioFunction).to.be.an.instanceOf(Function);
-  });
-});
-
 describe('find method', () => {
   it('should insert search terms into Siphon Object', () => {
     mySiphon.find(/[0-9]{2}\.[0-9]/);
