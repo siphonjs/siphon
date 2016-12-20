@@ -1,5 +1,5 @@
 # Siphon
-Siphonjs is an easy-to-use data extraction library for Nodejs designed to work at scale.
+Siphonjs is an easy-to-use data extraction library for Node.js designed to work at scale.
 
 ## Features
 
@@ -24,7 +24,7 @@ Collect 1000 temperatures in a matter of seconds!
 ```
 const siphon = require('siphonjs');
 
-//Push in urls of zipcode from 90025 to 91025
+// Collect 1000 weather urls
 const urls = [];
 for (let i = 90025; i < 91025; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
@@ -45,7 +45,7 @@ Controller:
 ```
 const siphon = require('siphonjs');
 
-//Push in urls of zipcode from 10000 to 99999
+// Collect 90000 weather urls
 const urls = [];
 for (let i = 10000; i <= 99999; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
