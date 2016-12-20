@@ -132,15 +132,32 @@ siphon()
 
 ### .notify
 
-Parameter: `function`
+Parameters: `function`
 
-To visualize received data. Defaults to console.log with stringified data.
+Notify is used to both visualize received data and store your data in a database. 
+If invoked without parameters, notify defaults to console.log with stringified data.
+
+Here are values you may wish to grab from the status message:
+
+```
+{
+  id: // unique URL string,
+  errors: [],
+  data: [],
+}
+```
+
+Example with Sequelize's "bulk create" method to store an array of values:
 
 ```
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.notify()
+.notify((statusMessage, requestObject) => {
+  Tank.bulkCreate({ processedHtml: statusMessage.data }, (err) => {
+    if (err) return handleError(err);
+  });
+})
 .run()
 ```
 
@@ -189,7 +206,7 @@ siphon()
 
 Parameter: `object`
 
-Provide headers for 
+Provide headers for GET requests.
 
 ```
 siphon()
@@ -202,15 +219,15 @@ siphon()
 
 ### .setInterval
 
-Parameter: `number` (seconds)
+Parameter: `number` (milliseconds)
 
-Sets how often you would like to search again.
+Sets how often you would like to search again. Great for throttling calls to stay within website's limits.
 
 ```
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.setInterval(5000)
+.setInterval(200)
 .notify()
 .run()
 ```
@@ -227,24 +244,6 @@ siphon()
 .find(/[0-9]{2}\.[0-9]/)
 .setProxies(['192.168.1.2', '123.456.7.8'])
 .notify()
-.run()
-```
-
-###
-
-Parameter: `function`
-
-Use a callback to insert data into your database.
-
-```
-siphon()
-.get(urls)
-.find(/[0-9]{2}\.[0-9]/)
-.store((data) => {
-  Tank.create({ html: data }, (err) => {
-    if (err) return handleError(err);
-  });
-})
 .run()
 ```
 
