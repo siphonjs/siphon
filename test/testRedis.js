@@ -12,7 +12,7 @@ for (let i = 90025; i < 90030; i++) {
 before(() => {
   client.flushdb();
   const mySiphon = siphon()
-    .setURLs(temps)
+    .get(temps)
     .find(/[0-9]{2}\.[0-9]/)
     .setRedis();
 });
