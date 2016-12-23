@@ -97,10 +97,3 @@ describe('setWorkers method', () => {
     expect(mySiphon.numWorkers).to.equal(2);
   });
 });
-
-describe('store method', () => {
-  it('should add storeFunction: callback to Siphon Object', () => {
-    mySiphon.store(() => console.log('storing to DB'));
-    expect(mySiphon.storeFunction).to.be.an.instanceOf(Function);
-  });
-});
