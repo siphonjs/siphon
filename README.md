@@ -24,7 +24,7 @@ Collect 1000 temperatures in a matter of seconds!
 ```
 const siphon = require('siphonjs');
 
-// Collect 1000 weather urls to search
+// Create array of 1000 weather urls to search
 const urls = [];
 for (let i = 90025; i < 91025; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
@@ -45,7 +45,7 @@ Controller:
 ```
 const siphon = require('siphonjs');
 
-// Collect 90000 weather urls to search
+// Create array of 90000 weather urls to search
 const urls = [];
 for (let i = 10000; i <= 99999; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
@@ -80,7 +80,6 @@ siphon()
 
 - `redis` for parallel processing with multiple servers
 - `selenium-webdriver` for jobs requiring full client-side rendering
-- `cheerio` to search HTML with Cheerio selector library
 
 # API
 
@@ -119,9 +118,9 @@ siphon()
 Parameters: `function`
 
 Notify is used to both visualize received data and store your data in a database. 
-If invoked without parameters, notify defaults to console.log with stringified data.
+If invoked without parameters, this method defaults to console.log with stringified data.
 
-Here are values you may wish to grab from the status message:
+Here is the structure of the status message:
 
 ```
 {
@@ -131,7 +130,7 @@ Here are values you may wish to grab from the status message:
 }
 ```
 
-Example with Sequelize's "bulk create" method to store an array of values:
+Here is an example with Sequelize's "bulk create" method to store your data:
 
 ```
 siphon()
@@ -150,15 +149,12 @@ siphon()
 Parameters: `function`
 
 Callback receives entire HTML string. 
-Add second parameter to callback if you'd like to traverse with Cheerio library.
 
 ```
 siphon()
 .get(urls)
-.processHtml((html, cheerio) => {
-  const $ = cheerio.load(html);
-  const titles = $('h1').text();
-  ...etc
+.processHtml((html) => {
+  console.log(html);
 })
 .run()
 ```
@@ -167,7 +163,7 @@ siphon()
 
 Parameter: `number`
 
-If a query fails, this will allow more tries on each failed query.
+If a query fails, this allows more tries on each failed query.
 
 ```
 siphon()
@@ -180,7 +176,7 @@ siphon()
 
 ### .run
 
-No parameters. Simply invoke as last method to execute your search!
+No parameters. Simply invoke as last method to execute your search on that server!
 
 ```
 siphon()
@@ -227,7 +223,7 @@ siphon()
 
 Parameter: `number` (milliseconds)
 
-Sets how often you would like to search again. Great for throttling calls to stay within website's limits.
+Sets how often you would like to search again. Great for throttling calls to stay within a website's request limits.
 
 ```
 siphon()
