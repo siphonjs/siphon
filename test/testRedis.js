@@ -25,7 +25,7 @@ describe('enqueue', () => {
 });
 
 // what happens if queue is empty?
-describe('dequeue', () => {
+describe('flush', () => {
   it('should remove job from Redis "jobsQueue"', () => {
     mySiphon.dequeue()
     // should logic
@@ -33,7 +33,13 @@ describe('dequeue', () => {
 });
 
 // calls .run so more complicated test
-describe('dequeueAndExecute', () => {
+describe('length', () => {
+  it('should dequeue and execute', () => {
+
+  });
+});
+
+describe('range', () => {
   it('should dequeue and execute', () => {
 
   });
