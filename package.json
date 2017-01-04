@@ -1,7 +1,7 @@
 {
   "name": "siphonjs",
   "version": "1.1.1",
-  "description": "Distributed data extraction library",
+  "description": "Node.js data extraction library built for scale",
   "homepage": "https://github.com/siphonjs/siphon",
   "bugs": {
     "url": "https://github.com/siphonjs/siphon/issues"
@@ -37,8 +37,7 @@
     "chai": "^3.5.0",
     "express": "^4.14.0",
     "mocha": "^3.2.0",
-    "request": "^2.79.0",
-    "url-parse": "^1.1.7"
+    "request": "^2.79.0"
   },
   "optionalDependencies": {
     "redis": "^2.6.3",

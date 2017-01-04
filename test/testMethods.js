@@ -55,6 +55,13 @@ describe('notify method', () => {
   });
 });
 
+describe('processHtml method', () => {
+  it('should add html function to Siphon Object', () => {
+    mySiphon.processHtml(() => console.log('process HTML'));
+    expect(mySiphon.html).to.be.an.instanceOf(Function);
+  });
+});
+
 describe('retries method', () => {
   it('should modify tries in Siphon Object', () => {
     mySiphon.retries(3);
