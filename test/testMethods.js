@@ -55,6 +55,13 @@ describe('notify method', () => {
   });
 });
 
+describe('processHtml method', () => {
+  it('should add html function to Siphon Object', () => {
+    mySiphon.processHtml(() => console.log('process HTML'));
+    expect(mySiphon.html).to.be.an.instanceOf(Function);
+  });
+});
+
 describe('retries method', () => {
   it('should modify tries in Siphon Object', () => {
     mySiphon.retries(3);
@@ -95,12 +102,5 @@ describe('setWorkers method', () => {
   it('should modify number of workers in Siphon Object', () => {
     mySiphon.setWorkers(2);
     expect(mySiphon.numWorkers).to.equal(2);
-  });
-});
-
-describe('store method', () => {
-  it('should add storeFunction: callback to Siphon Object', () => {
-    mySiphon.store(() => console.log('storing to DB'));
-    expect(mySiphon.storeFunction).to.be.an.instanceOf(Function);
   });
 });
