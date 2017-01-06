@@ -86,11 +86,11 @@ siphon()
 
 Using Siphon is simple! Chain as many methods as you'd like.
 
-### .get
+### .find
 
-Parameter: `string OR array of strings`
+Parameter: `regular expression`
 
-Each URL represents a query.
+Customize your search with regex.
 
 ```
 siphon()
@@ -100,11 +100,11 @@ siphon()
 .run()
 ```
 
-### .find
+### .get
 
-Parameter: `regular expression`
+Parameter: `string OR array of strings`
 
-Customize your search with regex.
+Each URL represents a query.
 
 ```
 siphon()
