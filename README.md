@@ -292,17 +292,42 @@ siphon()
 
 No parameters. Stores queries in your Redis server.
 
+```
+siphon()
+.get(urls)
+.setRedis()
+.enqueue()
+```
+
 ### .flush
 
 No parameters. Empties Redis server.
+
+```
+siphon()
+.setRedis()
+.flush()
+```
 
 ### .length
 
 No parameters. Gives length of jobs queue.
 
+```
+siphon()
+.setRedis('6379', '188.78.58.162', 'siphontestingnodejs')
+.length()
+```
+
 ### .range
 
 No parameters. Provides list of all jobs in queue.
+
+```
+siphon()
+.setRedis('6379', '188.78.58.162', 'siphontestingnodejs')
+.range()
+```
 
 ## Team
 
