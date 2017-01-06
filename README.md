@@ -116,7 +116,7 @@ siphon()
 
 ### .notify
 
-Parameters: `function`
+Parameter: `function`
 
 Notify is used to both visualize received data and store your data in a database. 
 If invoked without parameters, this method defaults to console.log with stringified data.
@@ -147,7 +147,7 @@ siphon()
 
 ### .processHtml
 
-Parameters: `function`
+Parameter: `function`
 
 Callback receives entire HTML string. 
 
