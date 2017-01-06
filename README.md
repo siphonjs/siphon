@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/siphonjs/siphon.svg?branch=master)](https://travis-ci.org/siphonjs/siphon)
 # Siphon
-Siphonjs is powerful, developer-friendly data extraction library for Node.js designed to work at scale.
+Siphonjs is a powerful, developer-friendly data extraction library for Node.js designed to work at scale.
 
 ## Features
 
