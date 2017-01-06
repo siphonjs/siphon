@@ -60,7 +60,7 @@ siphon()
     if (err) return handleError(err);
   });
 })
-.setRedis(6379, 192.168.123.456, 'password')
+.setRedis('6379', '192.168.123.456', 'password')
 .enqueue()
 ```
 
@@ -250,6 +250,29 @@ siphon()
 .run()
 ```
 
+## .setRedis
+
+Parameters: `string, string, string`
+
+Use a Redis queue to store your queries for later execution. Makes Redis methods below public (enqueue, flush, length, range). 
+Siphon will automatically configure the 'jobsQueue' list for you.
+
+### .enqueue
+
+No parameters. Stores queries in your Redis server.
+
+### .flush
+
+No parameters. Empties Redis server.
+
+### .length
+
+No parameters. Gives length of jobs queue.
+
+### .range
+
+No parameters. Provides list of all jobs in queue.
+
 ## Team
 
 [![Image of Will](https://avatars0.githubusercontent.com/u/7759384?v=3&s=150)](https://github.com/willbach)
@@ -259,5 +282,3 @@ siphon()
 ## License
 
 Released under the [MIT License](https://opensource.org/licenses/mit-license.php).
-
-
