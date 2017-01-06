@@ -298,7 +298,7 @@ siphon()
 
 ### .enqueue
 
-No parameters. Stores queries in your Redis server.
+Private until .setRedis method is called. No parameters. Stores queries in your Redis server.
 
 ```
 siphon()
@@ -309,7 +309,7 @@ siphon()
 
 ### .flush
 
-No parameters. Empties Redis server.
+Private until .setRedis method is called. No parameters. Empties Redis server.
 
 ```
 siphon()
@@ -319,7 +319,7 @@ siphon()
 
 ### .length
 
-No parameters. Gives length of jobs queue.
+Private until .setRedis method is called. No parameters. Gives length of jobs queue.
 
 ```
 siphon()
@@ -329,7 +329,7 @@ siphon()
 
 ### .range
 
-No parameters. Provides list of all jobs in queue.
+Private until .setRedis method is called. No parameters. Provides list of all jobs in queue.
 
 ```
 siphon()
