@@ -252,10 +252,41 @@ siphon()
 
 ## .setRedis
 
-Parameters: `string, string, string`
+Parameters: `string (PORT), string (Redis IP Address), string (password if applicable)`
 
 Use a Redis queue to store your queries for later execution. Makes Redis methods below public (enqueue, flush, length, range). 
-Siphon will automatically configure the 'jobsQueue' list for you.
+Siphon will automatically configure the 'jobsQueue' list for you. Defaults to your computer's client if no parameters provided.
+
+Single Computer:
+
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.notify()
+.setRedis()
+.enqueue()
+.run()
+```
+
+Remote Redis server with worker cluster:
+
+Controller:
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.notify()
+.setRedis('6379', '188.78.58.162', 'siphontestingnodejs')
+.enqueue()
+```
+
+Workers:
+```
+siphon()
+.setRedis('6379', '188.78.58.162', 'siphontestingnodejs')
+.run()
+```
 
 ### .enqueue
 
