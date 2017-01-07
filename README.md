@@ -1,5 +1,11 @@
+[![Build Status](https://travis-ci.org/siphonjs/siphon.svg?branch=master)](https://travis-ci.org/siphonjs/siphon)
+[![NPM Downloads](https://img.shields.io/npm/dm/siphonjs.svg)](https://www.npmjs.com/package/siphonjs)
+[![NPM Version](https://img.shields.io/npm/v/siphonjs.svg)](https://www.npmjs.com/package/siphonjs)
+[![License](https://img.shields.io/npm/l/siphonjs.svg)](https://www.npmjs.com/package/siphonjs)
+
+
 # Siphon
-Siphonjs is an easy-to-use data extraction library for Node.js designed to work at scale.
+Siphonjs is a powerful, developer-friendly data extraction library for Node.js designed to work at scale.
 
 ## Features
 
@@ -59,7 +65,7 @@ siphon()
     if (err) return handleError(err);
   });
 })
-.setRedis(6379, 192.168.123.456, 'password')
+.setRedis('6379', '192.168.123.456', 'password')
 .enqueue()
 ```
 
@@ -81,23 +87,14 @@ siphon()
 - `redis` for parallel processing with multiple servers
 - `selenium-webdriver` for jobs requiring full client-side rendering
 
+## Testing Dependencies
+
+- `mocha` test runner
+- `chai` assertion library
+
 # API
 
 Using Siphon is simple! Chain as many methods as you'd like.
-
-### .get
-
-Parameter: `string OR array of strings`
-
-Each URL represents a query.
-
-```
-siphon()
-.get(urls)
-.find(/[0-9]{2}\.[0-9]/)
-.notify()
-.run()
-```
 
 ### .find
 
@@ -113,9 +110,23 @@ siphon()
 .run()
 ```
 
+### .get
+
+Parameter: `string OR array of strings`
+
+Each URL represents a query.
+
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.notify()
+.run()
+```
+
 ### .notify
 
-Parameters: `function`
+Parameter: `function`
 
 Notify is used to both visualize received data and store your data in a database. 
 If invoked without parameters, this method defaults to console.log with stringified data.
@@ -146,7 +157,7 @@ siphon()
 
 ### .processHtml
 
-Parameters: `function`
+Parameter: `function`
 
 Callback receives entire HTML string. 
 
@@ -249,6 +260,85 @@ siphon()
 .run()
 ```
 
+## .setRedis
+
+Parameters: `string (PORT), string (Redis IP Address), string (password if applicable)`
+
+Use a Redis queue to store your queries for later execution. Makes Redis methods below public (enqueue, flush, length, range). 
+Siphon will automatically configure the 'jobsQueue' list for you. Defaults to your computer's client if no parameters provided.
+
+Single Computer:
+
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.notify()
+.setRedis()
+.enqueue()
+.run()
+```
+
+Remote Redis server with worker cluster:
+
+Controller:
+```
+siphon()
+.get(urls)
+.find(/[0-9]{2}\.[0-9]/)
+.notify()
+.setRedis('6379', '188.78.58.162', 'siphontestingnodejs')
+.enqueue()
+```
+
+Workers:
+```
+siphon()
+.setRedis('6379', '188.78.58.162', 'siphontestingnodejs')
+.run()
+```
+
+### .enqueue
+
+Private until .setRedis method is called. No parameters. Stores queries in your Redis server.
+
+```
+siphon()
+.get(urls)
+.setRedis()
+.enqueue()
+```
+
+### .flush
+
+Private until .setRedis method is called. No parameters. Empties Redis server.
+
+```
+siphon()
+.setRedis()
+.flush()
+```
+
+### .length
+
+Private until .setRedis method is called. No parameters. Gives length of jobs queue.
+
+```
+siphon()
+.setRedis('6379', '188.78.58.162', 'siphontestingnodejs')
+.length()
+```
+
+### .range
+
+Private until .setRedis method is called. No parameters. Provides list of all jobs in queue.
+
+```
+siphon()
+.setRedis('6379', '188.78.58.162', 'siphontestingnodejs')
+.range()
+```
+
 ## Team
 
 [![Image of Will](https://avatars0.githubusercontent.com/u/7759384?v=3&s=150)](https://github.com/willbach)
@@ -258,5 +348,3 @@ siphon()
 ## License
 
 Released under the [MIT License](https://opensource.org/licenses/mit-license.php).
-
-
