@@ -30,7 +30,7 @@
     "url": "https://github.com/siphonjs/siphon.git"
   },
   "scripts": {
-    "test": "mocha test/testMethods.js"
+    "test": "mocha test/*"
   },
   "license": "MIT",
   "dependencies": {
