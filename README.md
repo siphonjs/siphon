@@ -39,7 +39,6 @@ for (let i = 90025; i < 91025; i++) {
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.notify()
 .run()
 ```
 
@@ -89,6 +88,8 @@ siphon()
 
 ## Testing Dependencies
 
+Simply run "npm test" in your terminal to execute all tests!
+
 - `mocha` test runner
 - `chai` assertion library
 
@@ -106,7 +107,6 @@ Customize your search with regex.
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.notify()
 .run()
 ```
 
@@ -120,7 +120,6 @@ Each URL represents a query.
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.notify()
 .run()
 ```
 
@@ -181,7 +180,6 @@ siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
 .retries(5)
-.notify()
 .run()
 ```
 
@@ -193,7 +191,6 @@ No parameters. Simply invoke as last method to execute your search on that serve
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.notify()
 .run()
 ```
 
@@ -226,7 +223,6 @@ siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
 .setHeaders({ 'User-Agent': 'George Soowill' })
-.notify()
 .run()
 ```
 
@@ -241,7 +237,6 @@ siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
 .setInterval(200)
-.notify()
 .run()
 ```
 
@@ -256,7 +251,6 @@ siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
 .setProxies(['192.168.1.2', '123.456.7.8'])
-.notify()
 .run()
 ```
 
@@ -273,7 +267,6 @@ Single Computer:
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.notify()
 .setRedis()
 .enqueue()
 .run()
@@ -286,7 +279,6 @@ Controller:
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.notify()
 .setRedis('6379', '188.78.58.162', 'siphontestingnodejs')
 .enqueue()
 ```
