@@ -6,10 +6,6 @@ beforeEach(() => {
   mySiphon = siphon();
 });
 
-afterEach(() => {
-  mySiphon = null;
-});
-
 describe('default Siphon Object', () => {
   it('can have new properties added to it', () => {
     expect(mySiphon).to.be.extensible;
