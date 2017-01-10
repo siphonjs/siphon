@@ -50,22 +50,21 @@ Controller:
 ```
 const siphon = require('siphonjs');
 
-// Create array of 90000 weather urls to search
+// Search 100,000 weather urls in batches of 100
 const INCREMENT = 100;
-let urls = [];
 
 const siph = siphon()
 .setRedis('PORT', 'IP', 'PASSWORD')
-.processHtml( (html, res) => {
+.processHtml((html, res) => {
   let temp = html.match(/[0-9]{2}\.[0-9]/);
-  if(!temp) return { zip: null }
+  if (!temp) return { zip: null };
   else temp = temp[0];
-  if(temp === '10.4') return { zip: null }
+  if (temp === '10.4') return { zip: null }
   let zip = res.req.path.match(/[0-9]{5}/);
-  if(zip !== null) zip = zip[0];
-  return { zip: zip, temp: temp }
+  if (zip !== null) zip = zip[0];
+  return { zip: zip, temp: temp };
 })
-.notify( (statMsg, request) => {
+.notify((statMsg, request) => {
   console.log(statMsg);
   request.post(*your url here*, {
     headers: {
@@ -73,20 +72,21 @@ const siph = siphon()
     },
     body: JSON.stringify(statMsg)
   });
-})
+});
 
-for(let i = 00000; i < 99999; i += INCREMENT) {
-  urls = [];
-  for(let j = 0; j < INCREMENT; j++) {
+for (let i = 00000; i < 99999; i += INCREMENT) {
+  const urls = [];
+  for (let j = 0; j < INCREMENT; j++) {
     let num = (i + j).toString();
-    while(num.length < 5) {
+    while (num.length < 5) {
       num = '0' + num;
     }
+    
     urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${num}`);
   }
+  
   siph.get(urls).enqueue()
 }
-siph.run();
 ```
 
 Workers:
