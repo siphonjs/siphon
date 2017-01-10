@@ -62,7 +62,7 @@ const siph = siphon()
   if (temp === '10.4') return { zip: null }
   let zip = res.req.path.match(/[0-9]{5}/);
   if (zip !== null) zip = zip[0];
-  return { zip: zip, temp: temp };
+  return { zip, temp };
 })
 .notify((statMsg, request) => {
   console.log(statMsg);
