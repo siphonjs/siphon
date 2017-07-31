@@ -29,7 +29,6 @@ Collect 1000 temperatures in a matter of seconds!
 ```
 const siphon = require('siphonjs');
 
-// Create array of 1000 weather urls to search
 const urls = [];
 for (let i = 90025; i < 91025; i++) {
   urls.push(`https://www.wunderground.com/cgi-bin/findweather/getForecast?query=${i}`);
