@@ -4,7 +4,7 @@
 
 
 # Siphon
-Siphonjs is a powerful, developer-friendly data extraction library for Node.js designed to work at scale.
+Siphonjs is a powerful, lightweight data extraction library for Node.js designed to work at scale.
 
 ## Features
 
