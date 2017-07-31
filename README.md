@@ -48,6 +48,7 @@ Extract faster with remote servers and a Redis queue! We handle horizontal scali
 Controller:
 ```
 const siphon = require('siphonjs');
+const request = require('request');
 
 // Search 100,000 weather urls in batches of 100
 const INCREMENT = 100;
@@ -63,7 +64,7 @@ const siph = siphon()
   if (zip !== null) zip = zip[0];
   return { zip, temp };
 })
-.notify((statMsg, request) => {
+.notify((statMsg) => {
   console.log(statMsg);
   request.post(*your url here*, {
     headers: {
@@ -166,7 +167,7 @@ Here is an example with Sequelize's "bulk create" method to store your data:
 siphon()
 .get(urls)
 .find(/[0-9]{2}\.[0-9]/)
-.notify((statusMessage, requestObject) => {
+.notify((statusMessage) => {
   Tank.bulkCreate({ processedHtml: statusMessage.data }, (err) => {
     if (err) return handleError(err);
   });
